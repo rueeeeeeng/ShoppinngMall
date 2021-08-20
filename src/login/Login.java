@@ -38,6 +38,7 @@ public class Login extends Frames implements ActionListener, KeyListener {
 	private JPasswordField tfPW;
 	private JPanel p1, p2, p3, p2_left, p2_right;
 	private int check;
+	private JPanel p2_center;
 
 	public Login(String title, int width, int height) {
 		setTitle(title); // 제목
@@ -60,28 +61,35 @@ public class Login extends Frames implements ActionListener, KeyListener {
 
 		p2 = new JPanel();
 		p2.setLayout(new BorderLayout());
-
+		p2.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 30));
+		p2.setBackground(Color.WHITE);
+		
 		p2_left = new JPanel();
 		p2_left.setBackground(Color.white);
 		p2_left.setLayout(new GridLayout(2, 2));
 		p2_left.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-		lbl1 = new JLabel("ID:", JLabel.CENTER);
+		lbl1 = new JLabel("ID :", JLabel.CENTER);
 		tfID = new JTextField(10);
 		tfID.addKeyListener(this);
-		lbl2 = new JLabel("PW:", JLabel.CENTER);
+		lbl2 = new JLabel("PW :", JLabel.CENTER);
 		tfPW = new JPasswordField(10);
 		tfPW.addKeyListener(this);
-		
+
 		p2_left.add(lbl1);
-		p2_left.add(tfID);
 		p2_left.add(lbl2);
-		p2_left.add(tfPW);
+		p2.add(p2_left, BorderLayout.WEST);
 
-		p2.add(p2_left);
-
+		p2_center = new JPanel();
+		p2_center.setLayout(new BorderLayout());
+		p2_center.add(tfID, BorderLayout.NORTH);
+		p2_center.add(tfPW,BorderLayout.SOUTH);
+		p2_center.setBackground(Color.WHITE);
+		
+		p2_center.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 5));
+		p2.add(p2_center);
+		
 		p2_right = new JPanel();
 		p2_right.setLayout(new BorderLayout());
-		p2_right.setBackground(Color.red);
 
 		btnOK = new ButtonUtil("OK");
 		btnOK.addActionListener(this);
