@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -26,7 +28,7 @@ import manager.ProductAddAndDelete;
 import util.ButtonUtil;
 import util.Frames;
 
-public class Login extends Frames implements ActionListener {
+public class Login extends Frames implements ActionListener, KeyListener {
 
 	private JButton btnOK;
 	private JButton btnFindID, btnFindPW;
@@ -35,6 +37,7 @@ public class Login extends Frames implements ActionListener {
 	private JTextField tfID;
 	private JPasswordField tfPW;
 	private JPanel p1, p2, p3, p2_left, p2_right;
+	private int check;
 
 	public Login(String title, int width, int height) {
 		setTitle(title); // 제목
@@ -43,7 +46,6 @@ public class Login extends Frames implements ActionListener {
 //		setResizable(false); //창 사이즈 조정 금지
 //   	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램이 끝나면 닫고 종료한다 
 
-	
 		// 레이아웃
 		setLayout(new BorderLayout());
 
@@ -65,10 +67,11 @@ public class Login extends Frames implements ActionListener {
 		p2_left.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 		lbl1 = new JLabel("ID:", JLabel.CENTER);
 		tfID = new JTextField(10);
-
+		tfID.addKeyListener(this);
 		lbl2 = new JLabel("PW:", JLabel.CENTER);
 		tfPW = new JPasswordField(10);
-
+		tfPW.addKeyListener(this);
+		
 		p2_left.add(lbl1);
 		p2_left.add(tfID);
 		p2_left.add(lbl2);
@@ -114,36 +117,7 @@ public class Login extends Frames implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		if (obj == btnOK) {
-			String id = tfID.getText();
-			String pw = tfPW.getText();
-
-			int check = checkIDPW(id, pw);
-			if (check == 1) { //고객 로그인 성공 시
-				System.out.println("로그인 성공");
-				String Sname = "SELECT name FROM CUSTOMER WHERE ID ='" + id + "'";
-				ResultSet rsName = db.DB_Lib.getResultSet(Sname);
-				try { // 사용자 이름 가져오기
-					while (rsName.next()) {
-						Sname = rsName.getString(1);
-					}
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				JOptionPane.showMessageDialog(null, Sname + "님 로그인 성공했습니다");
-				String sql = "INSERT INTO CONNECTUSER VALUES('" + id + "')";
-				ResultSet rs = db.DB_Lib.getResultSet(sql); // 수정
-				new CustomerMain("메인", 500, 400);
-				dispose();
-			} else if (check == 2) { //관리자 로그인 성공시
-				JOptionPane.showMessageDialog(null, "관리자 로그인 성공했습니다");
-				new ProductAddAndDelete();
-				dispose();
-			} else { //로그인 실패
-				System.out.println("로그인 실패");
-				JOptionPane.showMessageDialog(null, "로그인 실패했습니다.");
-				tfID.setText("");
-				tfPW.setText("");
-			}
+			login();
 
 		} else if (obj == btnFindID) {
 			new FindId("ID 찾기", 300, 150);
@@ -167,7 +141,7 @@ public class Login extends Frames implements ActionListener {
 				check = 1;
 			} else if (rs2.next()) { // 관리자 로그인
 				check = 2;
-			} else { //로그인 실패
+			} else { // 로그인 실패
 				check = 3;
 			}
 		} catch (SQLException e) {
@@ -177,4 +151,54 @@ public class Login extends Frames implements ActionListener {
 		return check;
 	}
 
+	public void keyPressed(KeyEvent e) { // 엔터 눌렀을때도 검색될 수 있도록 함
+		if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+			login();
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void login() {
+		String id = tfID.getText();
+		String pw = tfPW.getText();
+		check = checkIDPW(id, pw);
+		if (check == 1) { // 고객 로그인 성공 시
+			System.out.println("로그인 성공");
+			String Sname = "SELECT name FROM CUSTOMER WHERE ID ='" + id + "'";
+			ResultSet rsName = db.DB_Lib.getResultSet(Sname);
+			try { // 사용자 이름 가져오기
+				while (rsName.next()) {
+					Sname = rsName.getString(1);
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			JOptionPane.showMessageDialog(null, Sname + "님 로그인 성공했습니다");
+			String sql = "INSERT INTO CONNECTUSER VALUES('" + id + "')";
+			ResultSet rs = db.DB_Lib.getResultSet(sql); // 수정
+			new CustomerMain("메인", 500, 400);
+			dispose();
+		} else if (check == 2) { // 관리자 로그인 성공시
+			JOptionPane.showMessageDialog(null, "관리자 로그인 성공했습니다");
+			new ProductAddAndDelete();
+			dispose();
+		} else { // 로그인 실패
+			System.out.println("로그인 실패");
+			JOptionPane.showMessageDialog(null, "로그인 실패했습니다.");
+			tfID.setText("");
+			tfPW.setText("");
+			tfID.requestFocus();
+		}
+	}
 }
