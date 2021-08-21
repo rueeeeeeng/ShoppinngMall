@@ -99,6 +99,7 @@ public class Login extends Frames implements ActionListener, KeyListener {
 		add(p2);
 
 		p3 = new JPanel();
+		p3.setBorder(BorderFactory.createEmptyBorder(10, 0,10, 0));
 		btnFindID = new ButtonUtil("ID 찾기");
 		btnFindID.addActionListener(this);
 		btnFindPW = new ButtonUtil("PW 찾기");
@@ -117,7 +118,7 @@ public class Login extends Frames implements ActionListener, KeyListener {
 
 	public static void main(String[] args) {
 		db.DB_Lib.init();
-		new Login("고객 로그인", 400, 230);
+		new Login("고객 로그인", 380, 250);
 
 	}
 
