@@ -133,7 +133,7 @@ public class Login extends Frames implements ActionListener, KeyListener {
 		} else if (obj == btnFindPW) {
 			new FindPw("pw 찾기", 350, 200);
 		} else if (obj == btnJoin) {
-			new JoinMemberShip("회원가입");
+			new Join("회원가입");
 		}
 	}
 
