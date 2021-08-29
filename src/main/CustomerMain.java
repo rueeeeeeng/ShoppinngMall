@@ -32,7 +32,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-
 import db.DB_Lib;
 import event.Event;
 import login.Login;
