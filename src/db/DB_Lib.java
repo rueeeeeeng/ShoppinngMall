@@ -17,7 +17,8 @@ public class DB_Lib {
 	public static void init() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@114.71.137.174:53994:XE", "COLA", "0517");
+//			conn = DriverManager.getConnection("jdbc:oracle:thin:@114.71.137.174:53994:XE", "COLA", "0517");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521", "COLA", "1234");
 			stmt = conn.createStatement();
 			System.out.println("DB 연결 성공");
 		} catch (ClassNotFoundException e) {

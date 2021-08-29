@@ -34,9 +34,9 @@ public class JoinMemberShip extends JFrame implements ActionListener {
 	private JTextField tname, tid, temail, taccount, tphone1, tphone2, tphone3, temailId;
 	private boolean check;
 	private JPanel p1, p2, p3, p4, p5, p6, p7, p8, p9, p10;
-	private String[] bankName = { "하나은행", "신한은행", "농협은행", "카카오뱅크", "우리은행" };
+//	private String[] bankName = { "하나은행", "신한은행", "농협은행", "카카오뱅크", "우리은행" };
 	private int count = 0;
-	private int myMoney;
+//	private int myMoney;
 	private JPasswordField tpw, rePw;
 	private String[] site = { "naver.com", "daum.net", "hamail.com", "nate.com", "gmail.com" };
 	private JComboBox<String> cb;
@@ -130,16 +130,16 @@ public class JoinMemberShip extends JFrame implements ActionListener {
 		tid = new JTextField(10);
 		tpw = new JPasswordField(15);
 		rePw = new JPasswordField(15);
-		taccount = new JTextField(20);
-		temail = new JTextField(10);
-		tphone1 = new JTextField(5);
-		tphone2 = new JTextField(5);
-		tphone3 = new JTextField(5);
-		temailId = new JTextField(10);
-
-		JLabel lb1 = new JLabel("-");
-		JLabel lb2 = new JLabel("-");
-
+//		taccount = new JTextField(20);
+//		temail = new JTextField(10);
+//		tphone1 = new JTextField(5);
+//		tphone2 = new JTextField(5);
+//		tphone3 = new JTextField(5);
+//		temailId = new JTextField(10);
+//
+//		JLabel lb1 = new JLabel("-");
+//		JLabel lb2 = new JLabel("-");
+//
 		p4.add(lname);
 		p4.add(tname);
 
@@ -147,27 +147,27 @@ public class JoinMemberShip extends JFrame implements ActionListener {
 		p5.add(tid);
 		p5.add(btnId);
 
-		p6.add(lemail);
-		p6.add(temail);
-		p6.add(gol);
-		p6.add(temailId);
-		p6.add(cb);
+//		p6.add(lemail);
+//		p6.add(temail);
+//		p6.add(gol);
+//		p6.add(temailId);
+//		p6.add(cb);
 
 		p7.add(lpw);
 		p7.add(tpw);
 
 		p8.add(lre);
 		p8.add(rePw);
-
-		p9.add(laccount);
-		p9.add(taccount);
-
-		p10.add(lphone);
-		p10.add(tphone1);
-		p10.add(lb1);
-		p10.add(tphone2);
-		p10.add(lb2);
-		p10.add(tphone3);
+//
+//		p9.add(laccount);
+//		p9.add(taccount);
+//
+//		p10.add(lphone);
+//		p10.add(tphone1);
+//		p10.add(lb1);
+//		p10.add(tphone2);
+//		p10.add(lb2);
+//		p10.add(tphone3);
 
 		btnOK = new JButton("Join");
 		btnDelete = new JButton("Cancel");
@@ -200,8 +200,9 @@ public class JoinMemberShip extends JFrame implements ActionListener {
 		int index = cb.getSelectedIndex();
 		Object obj = e.getSource();
 		if (obj == btnOK) {
-			if (tname.getText().equals("") || tid.getText().equals("") || tpw.getText().equals("")
-					|| temail.getText().equals("") || taccount.getText().equals("") || tphone1.getText().equals("")) {
+//			if (tname.getText().equals("") || tid.getText().equals("") || tpw.getText().equals("")
+//					|| temail.getText().equals("") || taccount.getText().equals("") || tphone1.getText().equals("")) {
+				if (tname.getText().equals("") || tid.getText().equals("") || tpw.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "정보를 빠짐없이 입력해주세요!");
 			} else if (!rePw.getText().equals(tpw.getText())) {
 				JOptionPane.showMessageDialog(null, "입력된 패스워드가 같지 않습니다!");
@@ -218,41 +219,42 @@ public class JoinMemberShip extends JFrame implements ActionListener {
 					String name = tname.getText();
 					String cuId = tid.getText();
 					String cuPw = tpw.getText();
-					String phone = tphone1.getText();
-					String phone2 = tphone2.getText();
-					String phone3 = tphone3.getText();
-					String account1 = taccount.getText();
-					String email = temailId.getText();
-					String email2 = temail.getText();
-					String femail = email2 + "@" + email;
-					String fPhone = phone + "-" + phone2 + "-" + phone3;
+//					String phone = tphone1.getText();
+//					String phone2 = tphone2.getText();
+//					String phone3 = tphone3.getText();
+//					String account1 = taccount.getText();
+//					String email = temailId.getText();
+//					String email2 = temail.getText();
+//					String femail = email2 + "@" + email;
+//					String fPhone = phone + "-" + phone2 + "-" + phone3;
 
-					String sql = "INSERT INTO CUSTOMER VALUES" + "('" + name + "', '" + cuId + "', '" + cuPw + "', '"
-							+ fPhone + "', '" + account1 + "', '" + femail + "')";
+//					String sql = "INSERT INTO CUSTOMER VALUES" + "('" + name + "', '" + cuId + "', '" + cuPw + "', '"
+//							+ fPhone + "', '" + account1 + "', '" + femail + "')";
+					String sql = "INSERT INTO CUSTOMER VALUES" + "('" + name + "', '" + cuId + "', '" + cuPw + "')";
 
 					db.DB_Lib.executeQuery(sql);
 
 					int r1 = (int) (Math.random() * 4);
-					String bank = bankName[r1];
+//					String bank = bankName[r1];
 
 					int r2 = (int) (Math.random() * 10000000 + 10000);
-					myMoney = r2;
+//					myMoney = r2;
 
-					String sql2 = "INSERT INTO ACCOUNT_INFO VALUES" + "('" + account1 + "', '" + bank + "', '" + myMoney
-							+ "')";
-					db.DB_Lib.executeQuery(sql2);
+//					String sql2 = "INSERT INTO ACCOUNT_INFO VALUES" + "('" + account1 + "', '" + bank + "', '" + myMoney
+//							+ "')";
+//					db.DB_Lib.executeQuery(sql2);
 
 					JOptionPane.showMessageDialog(null, "회원가입 완료!");
 					tname.setText("");
 					tid.setText("");
 					tpw.setText("");
 					rePw.setText("");
-					taccount.setText("");
-					temail.setText("");
-					tphone1.setText("");
-					tphone2.setText("");
-					tphone3.setText("");
-					temailId.setText("");
+//					taccount.setText("");
+//					temail.setText("");
+//					tphone1.setText("");
+//					tphone2.setText("");
+//					tphone3.setText("");
+//					temailId.setText("");
 				}
 
 			}
@@ -266,24 +268,24 @@ public class JoinMemberShip extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "중복된 아이디가 있으므로 다시 입력해주세요.", "Message",
 						JOptionPane.INFORMATION_MESSAGE);
 				tid.setText("");
-				temailId.setText("");
+//				temailId.setText("");
 			} else {
 				JOptionPane.showMessageDialog(null, "사용 가능한 아이디입니다!");
 				count = 1;
-				temailId.setText("");
+//				temailId.setText("");
 			}
 		}
-		if (index == 0) {
-			temailId.setText("naver.com");
-		} else if (index == 1) {
-			temailId.setText("daum.net");
-		} else if (index == 2) {
-			temailId.setText("hanmail.com");
-		} else if (index == 3) {
-			temailId.setText("nate.com");
-		} else if (index == 4) {
-			temailId.setText("gmail.com");
-		}
+//		if (index == 0) {
+//			temailId.setText("naver.com");
+//		} else if (index == 1) {
+//			temailId.setText("daum.net");
+//		} else if (index == 2) {
+//			temailId.setText("hanmail.com");
+//		} else if (index == 3) {
+//			temailId.setText("nate.com");
+//		} else if (index == 4) {
+//			temailId.setText("gmail.com");
+//		}
 	}
 
 	private boolean overlap(String id) {
