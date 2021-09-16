@@ -24,6 +24,7 @@ public class FindPw extends JFrame implements ActionListener {
 	private JButton btnOK, btnCancel;
 	private String get;
 
+	
 	public FindPw(String title, int width, int height) {
 		setTitle(title);
 		setSize(width, height);
